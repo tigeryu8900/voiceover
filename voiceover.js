@@ -29,6 +29,8 @@ const { getAudioDurationInSeconds } = require('get-audio-duration');
 const puppeteer = require('puppeteer');
 require('dotenv').config();
 
+const tempoLimit = JSON.parse(process.env.TEMPO);
+
 (async () => {
   if (verbose) console.log(`using video ${video} and transcript ${vtt} to generate en.mp4...`);
   const cues = await (async () => {
@@ -93,7 +95,7 @@ require('dotenv').config();
     var audio = await getAudio(cue.text);
     await fs.promises.writeFile(`tmp/${cue.start}.mp3`, audio, 'binary');
     var duration = await getAudioDurationInSeconds(`tmp/${cue.start}.mp3`);
-    var tempo = Math.min(Math.max(duration / (cue.end - cue.start), 0.75), 1.5).toFixed(1);
+    var tempo = Math.min(Math.max(duration / (cue.end - cue.start), tempoLimit[0]), tempoLimit[1]).toFixed(1);
     if (verbose) console.log(
       `text: ${cue.text}${'\n'}start: ${cue.start}, end: ${cue.end}, duration: ${duration}, ` +
       `targetDuration: ${cue.end - cue.start}, tempo: ${tempo}${'\n'}`
