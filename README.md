@@ -12,7 +12,7 @@ Options:
       --version  Show version number                                   [boolean]
   -i, --video    input video                        [string] [default: "zh.mp4"]
   -t, --vtt      input transcript                   [string] [default: "en.vtt"]
-  -o, --output   output video                       [string] [default: "zh.mp4"]
+  -o, --output   output video                       [string] [default: "en.mp4"]
   -v, --verbose  run in verbose mode                                   [boolean]
   -h, --help     Show help                                             [boolean]
 ```
