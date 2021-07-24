@@ -1,4 +1,4 @@
-const { video, vtt, verbose } = require('yargs').options({
+const { video, vtt, output, verbose } = require('yargs').options({
   'i': {
     alias : 'video',
     describe: 'input video',
@@ -12,6 +12,13 @@ const { video, vtt, verbose } = require('yargs').options({
     type: 'boolean',
     demand: false,
     default: 'en.vtt'
+  },
+  'o': {
+    alias : 'output',
+    describe: 'output video',
+    type: 'string',
+    demand: false,
+    default: 'zh.mp4'
   },
   'v': {
     alias : 'verbose',
