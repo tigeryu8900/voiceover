@@ -18,7 +18,7 @@ const { video, vtt, output, verbose } = require('yargs').options({
     describe: 'output video',
     type: 'string',
     demand: false,
-    default: 'zh.mp4'
+    default: 'en.mp4'
   },
   'v': {
     alias : 'verbose',
@@ -118,22 +118,22 @@ const tempoLimit = JSON.parse(process.env.TEMPO);
 
   function merge() {
     if (verbose) console.log('merging audio clips...');
-    var output = ffmpeg(video);
+    var out = ffmpeg(video);
     var filters = [];
     var audios = '';
     for (var i = 0; i < cues.length; i++) {
-      output.input(`tmp/${cues[i].start}.mp3`);
+      out.input(`tmp/${cues[i].start}.mp3`);
       filters.push(`[${i + 1}:a] atempo=${tempos[cues[i].start]}, adelay=${cues[i].start * 1000}:all=1 [a${i + 1}]`);
       audios += `[a${i + 1}]`;
     }
     filters.push(`${audios}amix=inputs=${cues.length}[a]`);
-    output.complexFilter(filters)
+    out.complexFilter(filters)
       .outputOptions(['-map 0:v', '-map [a]'])
       .audioCodec('aac')
       .videoCodec('copy')
       .save('en.mp4')
       .on('end', () => {
-        verbose ? console.log('en.mp4 finished rendering') : undefined;
+        verbose ? console.log(`${output} finished rendering`) : undefined;
         browser.close();
       });
   }
