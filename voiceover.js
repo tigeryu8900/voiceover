@@ -131,10 +131,18 @@ const tempoLimit = JSON.parse(process.env.TEMPO);
       .outputOptions(['-map 0:v', '-map [a]'])
       .audioCodec('aac')
       .videoCodec('copy')
-      .save('en.mp4')
+      .save(output)
       .on('end', () => {
         verbose ? console.log(`${output} finished rendering`) : undefined;
         browser.close();
+        if (!verbose) fs.readdir('tmp', (err, files) => {
+          if (err) throw err;
+          for (const file of files) {
+            fs.unlink(path.join('tmp', file), err => {
+              if (err) throw err;
+            });
+          }
+        });
       });
   }
 })();
