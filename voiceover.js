@@ -146,7 +146,7 @@ const tempoLimit = JSON.parse(process.env.TEMPO);
         if (!verbose) fs.readdir('tmp', (err, files) => {
           if (err) throw err;
           for (const file of files) {
-            fs.unlink(path.join('tmp', file), err => {
+            fs.unlink(`tmp/${file}`, err => {
               if (err) throw err;
             });
           }
