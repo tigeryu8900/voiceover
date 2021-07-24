@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "dotenv": "^10.0.0",
+    "ffmpeg": "^0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "get-audio-duration": "^2.0.3",
+    "node-fetch": "^2.6.1",
+    "node-webvtt": "^1.9.3",
+    "puppeteer": "^10.1.0",
+    "stream": "^0.0.2",
+    "yargs": "^17.0.1"
+  }
+}

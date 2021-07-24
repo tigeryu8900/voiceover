@@ -1,0 +1,7 @@
+.idea
+tmp
+node_modules
+.env
+*.mp3
+*.mp4
+*.vtt
