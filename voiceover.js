@@ -60,6 +60,7 @@ const tempoLimit = JSON.parse(process.env.TEMPO);
   page = await browser.newPage();
 
   await page.goto('https://wellsaidlabs.com');
+  await page.exposeFunction('nodeError', console.error);
   async function getAudio(text = 'test', speaker = process.env.AVATAR_ID || 16) {
     return await page.evaluate((text, speaker, project) => {
       var reader = new FileReader();
@@ -87,7 +88,14 @@ const tempoLimit = JSON.parse(process.env.TEMPO);
           "speaker_variant_id": speaker,
           "version": "latest"
         })
-      }).then(r => r.blob()).then(r => {
+      }).then(r => {
+        return new Promise((resolve, reject) => {
+          if (r.ok) r.blob().then(r => resolve(r));
+          else r.text().then(t => reject(
+            nodeError(`Error: Request for audio "${text}" failed with status code ${r.status} and body`, JSON.parse(t)))
+          );
+        });
+      }).then(r => {
         reader.readAsBinaryString(r);
         return new Promise((resolve, reject) => reader.addEventListener("load", () => resolve(reader.result)));
       });
