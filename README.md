@@ -5,7 +5,7 @@ A tool to dub a mp4 using a vtt transcript using WellSaid Labs
 ## Usage
 
 Before running the command, make sure to rename `.env.bac` to
-`.env` and change the`EMAIL`, `PASSOWORD`, and `PROJECT` fields.
+`.env` and change the`EMAIL`, `PASSWORD`, and `PROJECT` fields.
 
 ```shell
 Options:
