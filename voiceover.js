@@ -9,7 +9,7 @@ const { video, vtt, output, verbose } = require('yargs').options({
   't': {
     alias : 'vtt',
     describe: 'input transcript',
-    type: 'boolean',
+    type: 'string',
     demand: false,
     default: 'en.vtt'
   },
